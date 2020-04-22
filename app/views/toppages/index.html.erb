@@ -4,30 +4,30 @@
   </div>
 </div>
 
-<table class="table table-hover table-bordered">
+<div class="table-responsive-sm">
+ <table class="table table-hover table-bordered">
   <thead style="color: white; background-color: #bf0000;">
     <tr>
       <th>画像</th>
       <th>商品名</th>
-      <th>概要</th>
       <th>価格</th>
-      <th colspan="3"></th>
+      <th>概要</th>
+      <th>評価</th>
+      <th></th>
     </tr>
   </thead>
 
   <tbody>
     <% @items.first(10).each do |item| %>
-      <div class="container">
-       <div class="row">
-          <tr>
-            <td class=""><img src= "<%= item['smallImageUrls'][0]%>" %></td>
-            <td class=""><%= link_to item['itemName'],  item['itemUrl']%></td>
-            <td class=""><%= item['itemCaption'] %></td>
-            <td class=""><%= item.price %>円</td>
-            <td class=""><button class="far fa-star"></button></td>
-          </tr>
-       </div>
-      </div>
+    <tr>
+    　<td class=""><img src= "<%= item['smallImageUrls'][0]%>" %></td>
+    　<td class=""><%= link_to item['itemName'],  item['itemUrl']%></td>
+    　<td class=""><%= item.price %>円</td>
+    　<td class=""><%= item['itemCaption'] %></td>
+    　<td class=""></td>
+    　<td class=""><button class="far fa-star"></button></td>
+    </tr>
     <% end %>
   </tbody>
-</table>
+ </table>
+</div>
