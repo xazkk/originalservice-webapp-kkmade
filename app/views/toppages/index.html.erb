@@ -18,7 +18,7 @@
   </thead>
 
   <tbody>
-    <% @items.first(10).each do |item| %>
+    <% @items.each do |item| %>
     <tr>
     　<td class=""><img src= "<%= item['smallImageUrls'][0]%>" %></td>
     　<td class=""><%= link_to item['itemName'],  item['itemUrl']%></td>
@@ -31,3 +31,4 @@
   </tbody>
  </table>
 </div>
+
