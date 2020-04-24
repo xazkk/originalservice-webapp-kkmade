@@ -26,9 +26,19 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find(params[:id])
   end
 
   def update
+    @user = User.find(params[:id])
+    
+    if @user.update(user_params)
+      flash[:success] = '会員情報は正常に変更されました'
+      redirect_to @user
+    else
+      flash.now[:danger] = '会員情報の変更に失敗しました'
+      render :edit
+    end
   end
   
   private
