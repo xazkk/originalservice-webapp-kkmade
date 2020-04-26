@@ -9,7 +9,7 @@
       <%= render 'layouts/error_messages', model: f.object %>
       <div class="form-group">
         <%= f.label :image, 'プロフィール画像' %>
-        <%= f.text_field :image, class: 'form-control' %>
+        <%= f.file_field :image, class: 'form-control' %>
       </div>
       
       <div class="form-group">
