@@ -26,7 +26,7 @@
       　<td class=""><%= item.price %>円</td>
       　<td class=""><%= item['itemCaption'] %></td>
       　<td class="">
-      　  <%= form_with(model: @item, local: true) do |f| %>
+      　  <%= form_with(url: items_path, local: true, method: :post) do |f| %>
           <%= hidden_field_tag :image, item['smallImageUrls'][0]%>
           <%= hidden_field_tag :name, item['itemName'] %>
           <%= hidden_field_tag :price, item.price %>

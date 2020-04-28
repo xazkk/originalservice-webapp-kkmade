@@ -19,24 +19,38 @@
     </thead>
   
     <tbody>
-      <% @items.first(10).each do |item| %>
-      <tr>
-      　<td class=""><img src= "<%= item['smallImageUrls'][0]%>" %></td>
-      　<td class=""><%= link_to item['itemName'],  item['itemUrl']%></td>
-      　<td class=""><%= item.price %>円</td>
-      　<td class=""><%= item['itemCaption'] %></td>
-      　<td class="">
-      　  <%= form_with(model: @item, local: true) do |f| %>
-          <%= hidden_field_tag :image, item['smallImageUrls'][0]%>
-          <%= hidden_field_tag :name, item['itemName'] %>
-          <%= hidden_field_tag :price, item.price %>
-          <%= hidden_field_tag :content, item['itemCaption']%>
-          <%= hidden_field_tag :item_code, item['itemCode']%>
-          <%= f.submit '保存', class: 'btn btn-primary btn-sm' %>
-         <% end %>
-      　</td>
-      　<td class=""><button class="far fa-star"></button></td>
-      </tr>
+      <% @Ritems.first(10).each do |ritem| %>
+        <% item = @items.find_by(item_code: ritem['itemCode']) %>
+        <% if item %>
+          <tr>
+          　<td class=""><img src= "<%= item.image %>" %></td>
+          　<td class=""><%= link_to item.name,  ritem['itemUrl']%></td>
+          　<td class=""><%= item.price %>円</td>
+          　<td class=""><%= item.content %></td>
+          　<td class="">
+          　 平均評価： 
+          　</td>
+          　<td class=""><button class="far fa-star"></button></td>
+          </tr>
+        <% else %>
+          <tr>
+          　<td class=""><img src= "<%= ritem['smallImageUrls'][0]%>" %></td>
+          　<td class=""><%= link_to ritem['itemName'],  ritem['itemUrl']%></td>
+          　<td class=""><%= ritem.price %>円</td>
+          　<td class=""><%= ritem['itemCaption'] %></td>
+          　<td class="">
+          　  <%= form_with(model: @item, local: true) do |f| %>
+              <%= hidden_field_tag :image, ritem['smallImageUrls'][0]%>
+              <%= hidden_field_tag :name, ritem['itemName'] %>
+              <%= hidden_field_tag :price, ritem.price %>
+              <%= hidden_field_tag :content, ritem['itemCaption']%>
+              <%= hidden_field_tag :item_code, ritem['itemCode']%>
+              <%= f.submit '保存', class: 'btn btn-primary btn-sm' %>
+             <% end %>
+          　</td>
+          　<td class=""><button class="far fa-star"></button></td>
+          </tr>
+        <% end %>
       <% end %>
     </tbody>
    </table>

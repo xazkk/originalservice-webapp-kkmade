@@ -9,11 +9,13 @@ class ItemsController < ApplicationController
     keyword = ARGV[0] || 'basketball'
     
     # rakuten_web_serviceの使用法に乗っ取りHTTPリクエストを送ってデータを取得
-    @items = RakutenWebService::Ichiba::Item.search(keyword: keyword)
+    @Ritems = RakutenWebService::Ichiba::Item.search(keyword: keyword)
     # 取得したデータを10件まで表示
     #items.first(10).each do |item|
       #puts "#{item['itemName']}, #{item.price} yen"
     #end
+    
+    @items = Item.order(id: :desc)
   end
   
   def create
@@ -22,10 +24,10 @@ class ItemsController < ApplicationController
 
     if @item.save
       flash[:success] = '商品を登録しました。'
-      redirect_to root_path
+      redirect_to items_path
     else
       flash.now[:danger] = '商品登録に失敗しました。'
-      redirect_to root_path
+      redirect_to items_path
     end
   end
 

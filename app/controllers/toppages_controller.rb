@@ -6,7 +6,7 @@ class ToppagesController < ApplicationController
     end
     
     # ARGV[0]で実行時の1つめのパラメータを取得、存在しない場合は'Ruby'を設定
-    keyword = ARGV[0] || 'ball'
+    keyword = ARGV[0] || 'soccerball'
     
     # rakuten_web_serviceの使用法に乗っ取りHTTPリクエストを送ってデータを取得
     @items = RakutenWebService::Ichiba::Item.search(keyword: keyword)
