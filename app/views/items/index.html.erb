@@ -27,10 +27,9 @@
           　<td class=""><%= link_to item.name,  ritem['itemUrl']%></td>
           　<td class=""><%= item.price %>円</td>
           　<td class=""><%= item.content %></td>
-          　<td class="">
-          　 平均評価： 
+          　<td class="">平均評価
           　</td>
-          　<td class=""><button class="far fa-star"></button></td>
+          　<td class=""><%= render 'favorites/favorite_button', item: item %></button></td>
           </tr>
         <% else %>
           <tr>

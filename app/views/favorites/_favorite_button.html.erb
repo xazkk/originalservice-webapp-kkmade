@@ -1,0 +1,15 @@
+<% if current_user.liked?(item) %>
+    <%= form_with(model: current_user.favorites.find_by(item_id: item.id), local: true, method: :delete) do |f| %>
+      <%= hidden_field_tag :item_id, item.id %>
+      <%= button_tag type: "submit", class: "border-0", style: "background-color: white;" do %>
+        <span class="fas fa-star" style="color: #ffd700;"></span>
+      <% end %>
+    <% end %>
+<% else %>
+    <%= form_with(model: current_user.favorites.build, local: true) do |f| %>
+      <%= hidden_field_tag :item_id, item.id %>
+      <%= button_tag type: "submit", class: "border-0", style: "background-color: white;" do %>
+        <i class="far fa-star" onMouseOut="this.style.background=''" onMouseOver="this.style.background='gold'"></i>
+      <% end %>
+    <% end %>
+<% end %>

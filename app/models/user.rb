@@ -7,4 +7,20 @@ class User < ApplicationRecord
   has_secure_password
   
   mount_uploader :image, ImageUploader
+  
+  has_many :favorites
+  has_many :likes, through: :favorites, source: :item
+  
+  def favorite(item)
+    self.favorites.find_or_create_by(item_id: item.id)
+  end  
+    
+  def unfavorite(item)
+    fav_item = self.favorites.find_by(item_id: item.id)
+    fav_item.destroy if fav_item
+  end  
+    
+  def liked?(item)
+    self.likes.include?(item)
+  end
 end

@@ -3,4 +3,6 @@ class Item < ApplicationRecord
     validates :price, presence: true
     validates :content, presence: true
     validates :item_code, presence: true, uniqueness: true
+    
+    has_many :favorites
 end
