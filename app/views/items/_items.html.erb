@@ -1,0 +1,17 @@
+<div class="table-responsive-sm">
+  <table class="table table-hover table-bordered">
+    <tbody>
+      <% items.each do |item| %>
+      <tr>
+      　<td class=""><img src= "<%= item.image %>" %></td>
+      　<td class=""><%= item.name %></td>
+      　<td class=""><%= item.price %>円</td>
+      　<td class=""><%= item.content %></td>
+      　<td class="">平均評価
+      　</td>
+      　<td class=""><%= render 'favorites/favorite_button', item: item %></button></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

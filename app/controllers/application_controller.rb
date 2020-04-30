@@ -12,5 +12,9 @@ class ApplicationController < ActionController::Base
   
   def counts(user)
     @count_likes = user.likes.count
-  end  
+  end
+  
+  def counts_item(item)
+    @count_liked_items = item.liked_items.count
+  end
 end
