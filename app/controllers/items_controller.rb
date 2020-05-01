@@ -34,6 +34,10 @@ class ItemsController < ApplicationController
   def destroy
   end
   
+  def ranking
+    @fav_items = Item.find(Favorite.group(:item_id).order('count(item_id) desc').limit(3).pluck(:item_id))
+  end
+  
   private
 
   def item_params

@@ -12,6 +12,11 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :items, only: [:index, :create, :destroy]
+  resources :items, only: [:index, :create, :destroy] do
+    collection do 
+      get :ranking
+    end
+  end
+  
   resources :favorites, only: [:create, :destroy]
 end

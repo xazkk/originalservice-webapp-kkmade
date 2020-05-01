@@ -23,7 +23,7 @@
         <% item = @items.find_by(item_code: ritem['itemCode']) %>
         <% if item %>
           <tr>
-          　<td class=""><img src= "<%= item.image %>" %></td>
+          　<td class=""><img src= "<%= item.image %>" ></td>
           　<td class=""><%= link_to item.name,  ritem['itemUrl']%></td>
           　<td class=""><%= item.price %>円</td>
           　<td class=""><%= item.content %></td>
@@ -33,7 +33,7 @@
           </tr>
         <% else %>
           <tr>
-          　<td class=""><img src= "<%= ritem['smallImageUrls'][0]%>" %></td>
+          　<td class=""><img src= "<%= ritem['smallImageUrls'][0]%>" ></td>
           　<td class=""><%= link_to ritem['itemName'],  ritem['itemUrl']%></td>
           　<td class=""><%= ritem.price %>円</td>
           　<td class=""><%= ritem['itemCaption'] %></td>

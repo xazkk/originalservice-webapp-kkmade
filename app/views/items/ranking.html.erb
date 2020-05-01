@@ -1,17 +1,22 @@
 <div class="table-responsive-sm">
   <table class="table table-hover table-bordered">
     <tbody>
-      <% items.each do |item| %>
+      <% @fav_items.each do |item| %>
+      <% rank = 1 %>
+      <% count_liked_items = item.liked_items.count%>
       <tr>
-      　<td class=""><img src= "<%= item.image %>" ></td>
+        <td class=""><%= rank %>位</td>
+        <td class="">お気に入り数：<%= count_liked_items %>件</td>
+      　<td class=""><img src= "<%= item.image %>" %></td>
       　<td class=""><%= item.name %></td>
       　<td class=""><%= item.price %>円</td>
       　<td class=""><%= item.content %></td>
-      　<td class="">平均評価</td>
+      　<td class="">評価</td>
       　<td class=""><%= render 'favorites/favorite_button', item: item %></button></td>
+        <% rank += 1 %>
       </tr>
       <% end %>
     </tbody>
   </table>
-  <%= paginate items %>
+  
 </div>
