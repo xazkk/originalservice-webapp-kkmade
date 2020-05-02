@@ -5,7 +5,7 @@
         <li class="nav-item dropdown">
         　<a href="#" class="navbar-brand dropdown-toggle" data-toggle="dropdown">Ranking</a>
             <div class="dropdown-menu pt-0">
-            　<a class="dropdown-item" href="#">お気に入り数</a>
+            　<a class="dropdown-item" <%= link_to 'お気に入り数ランキング', ranking_items_path %></a>
             　<a class="dropdown-item" href="#">レビュー数</a>
             </div>
         </li>
@@ -23,7 +23,7 @@
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><%= current_user.name %></a>
             <ul class="dropdown-menu dropdown-menu-right">
               <li class="dropdown-item"><%= link_to 'Profile', user_path(current_user) %></li>
-              <li class="dropdown-item"><%= link_to 'お気に入り', user_path(current_user) %></li>
+              <li class="dropdown-item"><%= link_to 'お気に入り', favorites_user_path(current_user) %></li>
               <li class="dropdown-item"><%= link_to 'レビューした商品', user_path(current_user) %></li>
               <li class="dropdown-item"><%= link_to '会員情報変更', edit_user_path(current_user) %></li>
               <li class="dropdown-divider"></li>

@@ -21,13 +21,14 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(image: params[:image], name: params[:name], 
                      price: params[:price], content: params[:content], item_code: params[:item_code])
-
+    
     if @item.save
-      flash[:success] = '商品を登録しました。'
-      redirect_to items_path
+      current_user.favorite(@item)
+      flash[:success] = '商品をお気に入りしました'
+      redirect_back(fallback_location: root_path)
     else
       flash.now[:danger] = '商品登録に失敗しました。'
-      redirect_to items_path
+      redirect_back(fallback_location: root_path)
     end
   end
 
@@ -35,7 +36,7 @@ class ItemsController < ApplicationController
   end
   
   def ranking
-    @fav_items = Item.find(Favorite.group(:item_id).order('count(item_id) desc').limit(3).pluck(:item_id))
+    @fav_items = Item.create_fav_ranking
   end
   
   private

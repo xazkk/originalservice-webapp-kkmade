@@ -7,7 +7,7 @@ class Item < ApplicationRecord
     has_many :favorites
     has_many :liked_items, through: :favorites, source: :user
     
-    #def existed?(item)
-      #items.exists?(item_code: item.item_code)
-    #end
+    def self.create_fav_ranking
+      Item.find(Favorite.group(:item_id).order('count(item_id) desc').pluck(:item_id))
+    end
 end
