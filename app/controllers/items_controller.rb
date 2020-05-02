@@ -27,7 +27,7 @@ class ItemsController < ApplicationController
       flash[:success] = '商品をお気に入りしました'
       redirect_back(fallback_location: root_path)
     else
-      flash.now[:danger] = '商品登録に失敗しました。'
+      flash.now[:danger] = '商品登録に失敗しました。お気に入り出来ませんでした'
       redirect_back(fallback_location: root_path)
     end
   end
