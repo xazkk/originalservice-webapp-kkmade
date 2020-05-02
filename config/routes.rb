@@ -17,8 +17,10 @@ Rails.application.routes.draw do
   
   resources :items, only: [:index, :create, :destroy] do
     collection do 
-      get :ranking
+      get :fav_ranking
+      get :rev_ranking
     end
+    resources :reviews, only: [:index, :new, :create, :edit, :update, :destroy]
   end
   
   resources :favorites, only: [:create, :destroy]

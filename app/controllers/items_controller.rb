@@ -35,7 +35,7 @@ class ItemsController < ApplicationController
   def destroy
   end
   
-  def ranking
+  def fav_ranking
     @fav_items = Item.create_fav_ranking
   end
   

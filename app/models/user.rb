@@ -10,6 +10,8 @@ class User < ApplicationRecord
   
   has_many :favorites
   has_many :likes, through: :favorites, source: :item
+  has_many :reviews
+  has_many :coments, through: :reviews, source: :item
   
   def favorite(item)
     self.favorites.find_or_create_by(item_id: item.id)
@@ -23,4 +25,8 @@ class User < ApplicationRecord
   def liked?(item)
     self.likes.include?(item)
   end
+  
+  def reviewd?(review)
+    self.coments.include?(review)
+  end  
 end
