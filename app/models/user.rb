@@ -21,12 +21,16 @@ class User < ApplicationRecord
     fav_item = self.favorites.find_by(item_id: item.id)
     fav_item.destroy if fav_item
   end  
+  
+  #def review(item)
+    #self.reviews.find_or_create_by(item_id: item.id)
+  #end
     
   def liked?(item)
     self.likes.include?(item)
   end
   
-  def reviewd?(review)
-    self.coments.include?(review)
+  def reviewd?(item)
+    self.coments.include?(item)
   end  
 end

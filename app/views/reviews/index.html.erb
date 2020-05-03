@@ -2,7 +2,11 @@
 <div class="media mb-4">
   <img class="align-self-start mr-3 img-fluid" src="<%= @item.image %>" alt="">
   <div class="media-body">
-    <div class="mb-2">平均評価：４．１ <span><%= link_to 'レビューを作成する', new_item_review_path(@item) %></span></div>
+    <div class="mb-2">平均評価：４．１ 
+      <% unless current_user.reviewd?(@item) %>
+        <span><%= link_to 'レビューを作成する', new_item_review_path(@item) %></span>
+      <% end %>
+    </div>
     <div class="font-weight-bolder"><%= @item.price %>円</div>
   </div>
 </div>
@@ -10,24 +14,28 @@
 <h2 class="text-center">商品レビュー一覧</h2>
 
 <ul class="list-unstyled">
-  <% @users.each do |user| %>
-    <div class="ml-2 mt-2">
-       <p class="mb-0"><%= link_to user.name, user_path(user) %></p>
-     </div>
-    <li class="media mb-4">
-      <% if user.image? %>
-        <img class="mr-4 rounded" style="height: 50px;" src="<%= user.image %>" alt="">
-      <% else %>
-        <img class="mr-4 rounded" src="<%= gravatar_url(user, { size: 50 }) %>" alt="">
-      <% end %>
-    <div class="media-body">
-     <div>
-       <% @reviews.each do |review| %>
-         <div><%= review.rating %></div>
-         <div><%= review.content %></div>
-       <% end %>
-     </div>
-    </div>
-    </li>
-  <% end %>
+    <% @reviews.each do |review| %>
+      <div class="ml-2 mt-2">
+        <p class="mb-0"><%= link_to review.user.name, user_path(review.user) %></p>
+      </div>
+      <li class="media mb-4">
+        <% if review.user.image? %>
+          <img class="mr-4 rounded" style="height: 50px;" src="<%= review.user.image %>" alt="">
+        <% else %>
+          <img class="mr-4 rounded" src="<%= gravatar_url(user, { size: 50 }) %>" alt="">
+        <% end %>
+          <div class="media-body row">
+            <div class="col-sm-10">
+              <div><%= review.rating %></div>
+              <div class="card"><%= review.content %></div>
+            </div>
+            <div class="col-sm-2">
+              <% if current_user.id == review.user_id %>
+                <%= link_to '編集', edit_item_review_path(@item, review) ,class: 'btn btn-light' %>
+                <a href="#" class="btn btn-light" >削除</a>
+              <% end %>
+            </div>
+          </div>
+      </li>
+    <% end %>
 </ul>

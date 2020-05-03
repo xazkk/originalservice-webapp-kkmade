@@ -14,7 +14,7 @@ class ReviewsController < ApplicationController
 
   def create
     @item = Item.find(params[:item_id])
-    @review = @item.reviews.build(review_params)
+    @review = @item.reviews.build(rating: params[:rating], content: params[:content])
     @review.user_id = current_user.id
     if @review.save
       flash[:success] ='レビューを投稿しました'
@@ -52,6 +52,6 @@ class ReviewsController < ApplicationController
   private
   
   def review_params
-    params.require(:review).permit(:reting, :content)
+    params.require(:review).permit(:rating, :content)
   end
 end
