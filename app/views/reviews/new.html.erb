@@ -1,2 +1,13 @@
-<h1>Reviews#new</h1>
-<p>Find me in app/views/reviews/new.html.erb</p>
+<h5 class="mb-4"><%= @item.name %></h5>
+<div class="media">
+  <img class="align-self-start mr-3 img-fluid" src="<%= @item.image %>" alt="">
+  <div class="media-body">
+    <div class="mb-2">平均評価：４．１ <span><%= link_to 'レビューを作成する', new_item_review_path(@item) %></span></div>
+    <div class="font-weight-bolder"><%= @item.price %>円</div>
+  </div>
+</div>
+<div class="card mt-4">
+  <div class="card-body">
+    <%= @item.content %>
+  </div>
+</div>

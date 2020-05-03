@@ -4,6 +4,7 @@ class ReviewsController < ApplicationController
   def index
     @item = Item.find(params[:item_id])
     @reviews = @item.reviews
+    @users = User.order(id: :desc)
   end
   
   def new
@@ -17,10 +18,10 @@ class ReviewsController < ApplicationController
     @review.user_id = current_user.id
     if @review.save
       flash[:success] ='レビューを投稿しました'
-      redirect_back(fallback_location: root_path)
+      redirect_to item_reviews_path(@item)
     else
       flash.now[:danger] = 'レビューを投稿できませんでした'
-      redirect_back(fallback_location: root_path)
+      render :new
     end
   end
 
@@ -31,18 +32,21 @@ class ReviewsController < ApplicationController
 
   def update
     @item = Item.find(params[:item_id])
-    @review = @item.reviews.build(review_params)
-    if @review.save
+    @review = @item.reviews.find(params[:id])
+    if @review.update(review_params)
       flash[:success] ='レビューを投稿しました'
-      redirect_back(fallback_location: root_path)
+      redirect_to item_reviews_path(@item)
     else
       flash.now[:danger] = 'レビューを投稿できませんでした'
-      redirect_back(fallback_location: root_path)
+      render :edit
     end
   end
 
   def destroy
-    
+    @item = Item.find(params[:item_id])
+    @review = @item.reviews.find(params[:id])
+    flash[:success] ='レビューを削除しました'
+    redirect_back(fallback_location: root_path)
   end
   
   private
