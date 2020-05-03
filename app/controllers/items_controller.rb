@@ -1,4 +1,6 @@
 class ItemsController < ApplicationController
+  before_action :require_user_logged_in
+  
   def index
     # rakuten_web_service内のclassで使えるようにアプリケーションIDを設定
     RakutenWebService.configure do |c|

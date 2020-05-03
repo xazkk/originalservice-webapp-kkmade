@@ -1,4 +1,6 @@
 class FavoritesController < ApplicationController
+  before_action :require_user_logged_in
+  
   def create
     item = Item.find(params[:item_id])
     current_user.favorite(item)

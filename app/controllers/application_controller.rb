@@ -10,11 +10,19 @@ class ApplicationController < ActionController::Base
     end
   end
   
-  def counts(user)
+  def fav_counts(user)
     @count_likes = user.likes.count
   end
   
-  def counts_item(item)
+  def fav_counts_item(item)
     @count_liked_items = item.liked_items.count
+  end
+  
+  def rev_counts(user)
+    @count_coments = user.coments.count
+  end
+  
+  def rev_counts_item(item)
+    @count_comented_items = item.comented_items.count
   end
 end

@@ -4,8 +4,12 @@
       <div class="card-header" style="background-color: #bf0000;">
         <h3 class="card-title" style="color: white;"><%= @user.name %></h3>
       </div>
-      <div class="card-body">
+      <div class="card-body" style="text-align: center;">
+        <% if @user.image? %>
         <img class="rounded img-fluid" src="<%= @user.image %>" alt="">
+        <% else %>
+        <img class="rounded img-fluid" src="<%= gravatar_url(@user, { size: 500 }) %>" alt="">
+        <% end %>
       </div>
     </div>
   </aside>
