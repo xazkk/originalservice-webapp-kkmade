@@ -31,8 +31,8 @@
             </div>
             <div class="col-sm-2">
               <% if current_user.id == review.user_id %>
-                <%= link_to '編集', edit_item_review_path(@item, review) ,class: 'btn btn-light' %>
-                <a href="#" class="btn btn-light" >削除</a>
+                <%= link_to '編集', edit_item_review_path(@item, review) ,class: 'btn btn-success' %>
+                <a href="#" class="btn btn-danger" >削除</a>
               <% end %>
             </div>
           </div>

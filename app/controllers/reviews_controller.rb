@@ -1,5 +1,6 @@
 class ReviewsController < ApplicationController
   before_action :require_user_logged_in
+  before_action :correct_user, only: [:update]
   
   def index
     @item = Item.find(params[:item_id])
@@ -27,20 +28,22 @@ class ReviewsController < ApplicationController
   end
 
   def edit
-    @review = Review.find(params[:id])
     @item = Item.find(params[:item_id])
+    @review = @item.reviews.find(params[:id])
   end
 
   def update
     @item = Item.find(params[:item_id])
     @review = @item.reviews.find(params[:id])
-    if @review.update(review_params)
-      flash[:success] ='レビューを投稿しました'
-      redirect_to item_reviews_path(@item)
-    else
-      flash.now[:danger] = 'レビューを投稿できませんでした'
-      render :edit
-    end
+    #if (@review.user_id == current_user.id)
+      if @review.update(review_params)
+        flash[:success] ='レビューを編集しました'
+        redirect_to item_reviews_path(@item)
+      else
+        flash.now[:danger] = 'レビューを編集できませんでした'
+        render :edit
+      end
+    #end
   end
 
   def destroy
@@ -53,7 +56,16 @@ class ReviewsController < ApplicationController
   private
   
   def review_params
-    #params.require(:review).permit(:rating, :content)
-    params.permit(:rating, :content)
+    params.require(:review).permit(:rating, :content)
+    #params.permit(:rating, :content)
+  end
+  
+  def correct_user
+    @item = Item.find_by(id: params[:item_id])
+    @review = @item.reviews.find_by(id: params[:id])
+    @user = current_user.reviews.find_by(id: @review.user_id)
+    unless current_user 
+      redirect_to root_url
+    end
   end
 end

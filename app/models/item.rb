@@ -9,7 +9,10 @@ class Item < ApplicationRecord
     has_many :reviews
     has_many :comented_items, through: :reviews, source: :user
     
+    accepts_nested_attributes_for :reviews
+    
     def self.create_fav_ranking
       Item.find(Favorite.group(:item_id).order('count(item_id) desc').limit(15).pluck(:item_id))
     end
+    
 end
