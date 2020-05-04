@@ -22,7 +22,7 @@
         <% if review.user.image? %>
           <img class="mr-4 rounded" style="height: 50px;" src="<%= review.user.image %>" alt="">
         <% else %>
-          <img class="mr-4 rounded" src="<%= gravatar_url(user, { size: 50 }) %>" alt="">
+          <img class="mr-4 rounded" src="<%= gravatar_url(review.user, { size: 50 }) %>" alt="">
         <% end %>
           <div class="media-body row">
             <div class="col-sm-10">
