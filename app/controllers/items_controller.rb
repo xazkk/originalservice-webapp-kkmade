@@ -41,6 +41,10 @@ class ItemsController < ApplicationController
     @fav_items = Item.create_fav_ranking
   end
   
+  def rev_ranking
+    @rev_items = Item.create_rev_ranking
+  end
+  
   private
 
   def item_params

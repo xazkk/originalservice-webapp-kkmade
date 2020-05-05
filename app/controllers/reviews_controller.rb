@@ -48,6 +48,7 @@ class ReviewsController < ApplicationController
   def destroy
     @item = Item.find(params[:item_id])
     @review = @item.reviews.find(params[:id])
+    @review.destroy
     flash[:success] ='レビューを削除しました'
     redirect_back(fallback_location: root_path)
   end

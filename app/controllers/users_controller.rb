@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    fav_counts(@user)
+    counts(@user)
   end
 
   def new
@@ -45,7 +45,13 @@ class UsersController < ApplicationController
   def favorites
     @user = User.find(params[:id])
     @favorites = @user.likes.page(params[:page]).per(5)
-    fav_counts(@user)
+    counts(@user)
+  end
+  
+  def reviews
+    @user = User.find(params[:id])
+    @reviews = @user.coments.page(params[:page]).per(5)
+    counts(@user)
   end
   
   private

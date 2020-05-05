@@ -16,7 +16,7 @@
   <div class="col-sm-8">
     <ul class="nav nav-tabs nav-justified mb-3">
       <li class="nav-item"><a href="<%= favorites_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(favorites_user_path(@user)) %>">お気に入り商品一覧 <span class="badge badge-warning"><%= @count_likes %></span></a></li>
-      <li class="nav-item"><a href="#" class="nav-link">レビューした商品一覧</a></li>
+      <li class="nav-item"><a href="<%= reviews_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(reviews_user_path(@user)) %>">レビューした商品一覧 <span class="badge badge-warning"><%= @count_coments %></span></a></li>
     </ul>
     <%= render 'items/items', items: @favorites%>
   </div>

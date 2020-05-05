@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show, :new, :create, :edit, :update] do
     member do
       get :favorites
+      get :reviews
     end
   end
   

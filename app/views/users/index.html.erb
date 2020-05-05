@@ -12,11 +12,10 @@
           </div>
         </div>
         <div class="media-body">
-          <% count_likes = user.likes.count %>
-          <p class="mt-2"><a href="<%= favorites_user_path(user) %>">お気に入り数： <%= count_likes %></a></p>
+          <p class="mt-2"><a href="<%= favorites_user_path(user) %>">お気に入り数： <%= user.likes.count %></a></p>
         </div>
          <div class="media-body">
-          <p class="ml-2 mt-3"><%= link_to 'レビューした商品数', user_path(user) %></p>
+          <p class="mt-2"><a href="<%= reviews_user_path(user) %>">レビューした商品数： <%= user.coments.count %></a></p>
         </div>
       </li>
     <% end %>

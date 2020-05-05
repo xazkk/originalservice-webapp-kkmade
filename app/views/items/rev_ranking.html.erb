@@ -1,16 +1,16 @@
 <div class="center jumbotron p-1" style="background-color: #f8f8ff;">
   <div class="text-center">
-    <h1 style="color: #bf0000;">お気に入り数ランキングTOP15</h1>
+    <h1 style="color: #bf0000;">レビューランキングTOP15</h1>
   </div>
 </div>
 
 <div class="table-responsive-sm">
   <table class="table table-hover table-bordered">
     <tbody>
-      <% @fav_items.each.with_index(1) do |item, i| %>
+      <% @rev_items.each.with_index(1) do |item, i| %>
       <tr>
         <td class=""><%= i %>位</td>
-        <td class=""><%= item.liked_items.count %>件</td>
+        <td class=""><%= item.comented_items.count %>件</td>
       　<td class=""><img src= "<%= item.image %>" %></td>
       　<td class=""><%= item.name %></td>
       　<td class=""><%= item.price %>円</td>
