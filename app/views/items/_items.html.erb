@@ -7,7 +7,11 @@
       　<td class=""><%= item.name %></td>
       　<td class=""><%= item.price %>円</td>
       　<td class=""><%= item.content %></td>
-      　<td class=""><%= link_to 'レビュー', item_reviews_path(item) %></td>
+      　<% if item.average %>
+        　<td class=""><%= link_to item.average, item_reviews_path(item) %></td>
+        <% else %>
+        　<td class=""><%= link_to 'レビュー', item_reviews_path(item) %></td>
+        <% end %>
       　<td class=""><%= render 'favorites/favorite_button', item: item %></button></td>
       </tr>
       <% end %>

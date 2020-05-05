@@ -59,3 +59,5 @@ gem 'kaminari'
 gem 'rakuten_web_service'
 
 gem 'carrierwave'
+
+gem 'pry-byebug', group: :development

@@ -18,4 +18,8 @@ class Item < ApplicationRecord
     def self.create_rev_ranking
       Item.find(Review.group(:item_id).order('count(item_id) desc').limit(15).pluck(:item_id))
     end
+    
+    def average
+      self.reviews.average(:rating)
+    end  
 end

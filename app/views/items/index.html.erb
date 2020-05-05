@@ -27,8 +27,11 @@
           　<td class=""><%= link_to item.name,  ritem['itemUrl']%></td>
           　<td class=""><%= item.price %>円</td>
           　<td class=""><%= item.content %></td>
-          　<td class=""><%= link_to 'レビュー', item_reviews_path(item) %>
-          　</td>
+          　<% if item.average %>
+            　<td class=""><%= link_to item.average, item_reviews_path(item) %></td>
+            <% else %>
+            　<td class=""><%= link_to 'レビュー', item_reviews_path(item) %></td>
+            <% end %>
           　<td class=""><%= render 'favorites/favorite_button', item: item %></button></td>
           </tr>
         <% else %>
@@ -38,17 +41,19 @@
           　<td class=""><%= ritem.price %>円</td>
           　<td class=""><%= ritem['itemCaption'] %></td>
           　<td class="">
-          　  <%= form_with(model: @item, local: true) do |f| %>
+          　  <%= form_with(url: items_path, local: true) do |f| %>
+              <%= hidden_field_tag :num, 1 %>
               <%= hidden_field_tag :image, ritem['smallImageUrls'][0]%>
               <%= hidden_field_tag :name, ritem['itemName'] %>
               <%= hidden_field_tag :price, ritem.price %>
               <%= hidden_field_tag :content, ritem['itemCaption']%>
               <%= hidden_field_tag :item_code, ritem['itemCode']%>
-              <%= f.submit '保存', class: 'btn btn-primary btn-sm' %>
+              <%= f.submit 'レビュー', class: 'btn btn-primary btn-sm' %>
              <% end %>
           　</td>
           　<td class="">
           　   <%= form_with(url: items_path, local: true) do |f| %>
+                <%= hidden_field_tag :num, 2 %>
                 <%= hidden_field_tag :user_id, current_user.id %>
                 <%= hidden_field_tag :image, ritem['smallImageUrls'][0]%>
                 <%= hidden_field_tag :name, ritem['itemName'] %>
@@ -58,7 +63,8 @@
                 <%= button_tag type: "submit", class: "border-0", style: "background-color: white;" do %>
                   <i class="far fa-star" onMouseOut="this.style.background=''" onMouseOver="this.style.background='gold'"></i>
                 <% end %>
-              <% end %></td>
+              <% end %>
+             </td>
           </tr>
         <% end %>
       <% end %>
