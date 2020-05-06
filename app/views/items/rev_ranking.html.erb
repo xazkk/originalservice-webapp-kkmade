@@ -9,7 +9,7 @@
     <tbody>
       <% lastReviewCount = 0 %>
       <% j = 1 %>
-      <% @rev_items.each.with_index(1) do |item, i| %>
+      <% @rev_items.first(15).each.with_index(1) do |item, i| %>
       <tr>
         <% if i == 1 %>
           <% lastReviewCount = item.comented_items.count %>

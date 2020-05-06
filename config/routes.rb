@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :items, only: [:index, :create, :destroy] do
+  resources :items, only: [:index, :create] do
     collection do 
       get :fav_ranking
       get :rev_ranking

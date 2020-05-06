@@ -7,7 +7,6 @@ class ItemsController < ApplicationController
     
     # rakuten_web_serviceの使用法に乗っ取りHTTPリクエストを送ってデータを取得
     @Ritems = RakutenWebService::Ichiba::Item.search(keyword: keyword)
-    # 取得したデータを10件まで表示
     
     @items = Item.order(id: :desc)
   end
@@ -21,10 +20,9 @@ class ItemsController < ApplicationController
   end
   
   def create
-    @item = Item.new(image: params[:image], name: params[:name], 
-                     price: params[:price], content: params[:content], item_code: params[:item_code])
+    @item = Item.new(item_params)
     
-    #未追加の商品をお気に入りした時
+    #未追加の商品をレビューする時
     if params[:num] == '1'
       if @item.save
         redirect_to item_reviews_path(@item)
@@ -32,7 +30,7 @@ class ItemsController < ApplicationController
         flash.now[:danger] = '商品登録に失敗しました。'
         redirect_back(fallback_location: root_path)
       end
-    #未追加の商品をレビューする時
+    #未追加の商品をお気に入りした時
     else
       if @item.save
         current_user.favorite(@item)
@@ -50,7 +48,6 @@ class ItemsController < ApplicationController
   
   def fav_ranking
     @fav_items = Item.create_fav_ranking
-    #@favitemsranking = Kaminari.paginate_array(@fav_items).page(params[:page]).per(10)
   end
   
   def rev_ranking
@@ -60,6 +57,6 @@ class ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:image, :name, :price, :content, :item_code)
+    params.permit(:image, :name, :price, :content, :item_code)
   end
 end
