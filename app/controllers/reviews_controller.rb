@@ -1,5 +1,6 @@
 class ReviewsController < ApplicationController
   before_action :require_user_logged_in
+  before_action :correct_user, only: [:edit, :update, :destroy]
   
   def index
     @item = Item.find(params[:item_id])
@@ -60,4 +61,11 @@ class ReviewsController < ApplicationController
     #params.permit(:rating, :content)
   end
   
+  def correct_user
+    @Item = Item.find(params[:item_id])
+    @review = @Item.reviews.find_by(id: params[:id])
+    if @review == nil || @review.user_id != current_user.id 
+      redirect_to root_path
+    end
+  end
 end
