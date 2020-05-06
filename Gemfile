@@ -58,7 +58,8 @@ gem 'kaminari'
 
 gem 'rakuten_web_service'
 
-gem 'carrierwave'
+gem 'carrierwave', '~> 1.3', '>= 1.3.1'
+gem 'cloudinary'
 
 gem 'pry-byebug', group: :development
 
