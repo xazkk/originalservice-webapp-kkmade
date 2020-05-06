@@ -1,11 +1,11 @@
-<% if logged_in? %>
-  <div class="center jumbotron pt-2 pb-2">
-    <div class="text-center">
-      <h1>Welcome to the RakutenItems Search Service</h1>
-    </div>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong><%= params[:keyword] %></strong> の検索結果を表示しました
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+       <span aria-hidden="true">&times;</span>
+    </button>
   </div>
   
-   <%= form_with(url: search_items_path, method: :get, local: true) do |f| %>
+  <%= form_with(url: search_items_path, method: :get, local: true) do |f| %>
      <div class="d-flex justify-content-center">
       <div class="form-group">
        <%= f.text_field :keyword, placeholder: "商品を検索", class: 'form-control' %>
@@ -84,12 +84,3 @@
     </tbody>
    </table>
   </div>
-<% else %>
-  <div class="center jumbotron">
-    <div class="text-center">
-      <h1>Welcome to RakutenItems</h1>
-      <%= link_to '新規会員登録はこちら', signup_path, class: 'btn btn-danger rounded-pill pr-4 pl-4' %>
-    </div>
-  </div>
-<% end %>
-

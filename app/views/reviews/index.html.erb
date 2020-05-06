@@ -2,7 +2,7 @@
 <div class="media mb-4">
   <img class="align-self-start mr-3 img-fluid" src="<%= @item.image %>" alt="">
   <div class="media-body">
-    <div class="mb-2">平均評価：４．１ 
+    <div class="mb-2">平均評価：<%= @item.average %>
       <% unless current_user.reviewd?(@item) %>
         <span><%= link_to 'レビューを作成する', new_item_review_path(@item) %></span>
       <% end %>

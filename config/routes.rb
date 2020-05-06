@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     collection do 
       get :fav_ranking
       get :rev_ranking
+      get :search
     end
     resources :reviews, only: [:index, :new, :create, :edit, :update, :destroy]
   end

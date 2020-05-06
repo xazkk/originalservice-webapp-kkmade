@@ -22,4 +22,9 @@ class Item < ApplicationRecord
     def average
       self.reviews.average(:rating)
     end  
+    
+    # rakuten_web_service内のclassで使えるようにアプリケーションIDを設定
+    RakutenWebService.configure do |c|
+      c.application_id = 1008590106441031375
+    end
 end
